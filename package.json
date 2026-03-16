@@ -9,7 +9,7 @@
     "lint": "eslint",
     "prettier:check": "prettier --check .",
     "check-all": "npm run lint && npm run prettier:check",
-    "lint:fix": "next lint --fix",
+    "lint:fix": "npm run lint -- --fix",
     "prettier:fix": "prettier --write ."
   },
   "dependencies": {
