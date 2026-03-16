@@ -1,0 +1,14 @@
+.gitignore
+.npmignore
+.openapi-generator-ignore
+api.ts
+apis/app-api.ts
+base.ts
+common.ts
+configuration.ts
+docs/AppApi.md
+docs/MessageResponseDto.md
+git_push.sh
+index.ts
+models/index.ts
+models/message-response-dto.ts
