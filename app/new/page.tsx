@@ -1,7 +1,8 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { decrement, increment } from './counter.service';
 
 export default function Home() {
   const [counter, setCounter] = useState(0);
@@ -9,8 +10,15 @@ export default function Home() {
   return (
     <div>
       <h1>Counter: {counter}</h1>
-      <Button onClick={() => setCounter(counter + 1)}>Increment</Button>
-      <Button onClick={() => setCounter(counter - 1)}>Decrement</Button>
+      <Button testId="increment-button" onClick={() => setCounter(increment(counter))}>
+        Increment
+      </Button>
+      <Button testId="decrement-button" onClick={() => setCounter(decrement(counter))}>
+        Decrement
+      </Button>
+      <Button testId="clear-button" onClick={() => setCounter(0)}>
+        Clear
+      </Button>
     </div>
   );
 }
