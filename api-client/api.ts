@@ -1,4 +1,5 @@
 /* tslint:disable */
+
 /**
  * API Documentation
  * API - IT Asset Tracker
@@ -12,3 +13,7 @@
  */
 
 export * from './apis/app-api';
+export * from './apis/assets-api';
+export * from './apis/categories-api';
+export * from './apis/employees-api';
+export * from './apis/roles-api';
