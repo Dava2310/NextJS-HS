@@ -1,13 +1,12 @@
 # CreateCategoryDto
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **string** | Name of the category | [default to undefined]
-**code** | **string** | Unique category code. | [default to undefined]
-**description** | **string** | Description of the category. | [default to undefined]
+| Name            | Type       | Description                  | Notes                  |
+| --------------- | ---------- | ---------------------------- | ---------------------- |
+| **name**        | **string** | Name of the category         | [default to undefined] |
+| **code**        | **string** | Unique category code.        | [default to undefined] |
+| **description** | **string** | Description of the category. | [default to undefined] |
 
 ## Example
 
@@ -15,9 +14,9 @@ Name | Type | Description | Notes
 import { CreateCategoryDto } from './api';
 
 const instance: CreateCategoryDto = {
-    name,
-    code,
-    description,
+  name,
+  code,
+  description,
 };
 ```
 
