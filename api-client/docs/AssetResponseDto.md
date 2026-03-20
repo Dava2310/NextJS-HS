@@ -1,18 +1,17 @@
 # AssetResponseDto
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **number** | Unique asset identifier | [readonly] [default to undefined]
-**sku** | **string** | Unique stock keeping unit (SKU) code for the asset | [default to undefined]
-**name** | **string** | Name of the asset | [default to undefined]
-**description** | **string** | Description of the asset | [default to undefined]
-**model** | **string** | Model of the asset | [default to undefined]
-**brand** | **string** | Brand of the asset | [default to undefined]
-**categoryId** | **number** | Category identifier (foreign key) | [default to undefined]
-**employeeId** | **number** | Employee identifier (foreign key) - assigned custodian | [default to undefined]
+| Name            | Type       | Description                                            | Notes                             |
+| --------------- | ---------- | ------------------------------------------------------ | --------------------------------- |
+| **id**          | **number** | Unique asset identifier                                | [readonly] [default to undefined] |
+| **sku**         | **string** | Unique stock keeping unit (SKU) code for the asset     | [default to undefined]            |
+| **name**        | **string** | Name of the asset                                      | [default to undefined]            |
+| **description** | **string** | Description of the asset                               | [default to undefined]            |
+| **model**       | **string** | Model of the asset                                     | [default to undefined]            |
+| **brand**       | **string** | Brand of the asset                                     | [default to undefined]            |
+| **categoryId**  | **number** | Category identifier (foreign key)                      | [default to undefined]            |
+| **employeeId**  | **number** | Employee identifier (foreign key) - assigned custodian | [default to undefined]            |
 
 ## Example
 
@@ -20,14 +19,14 @@ Name | Type | Description | Notes
 import { AssetResponseDto } from './api';
 
 const instance: AssetResponseDto = {
-    id,
-    sku,
-    name,
-    description,
-    model,
-    brand,
-    categoryId,
-    employeeId,
+  id,
+  sku,
+  name,
+  description,
+  model,
+  brand,
+  categoryId,
+  employeeId,
 };
 ```
 

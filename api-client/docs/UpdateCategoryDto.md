@@ -1,13 +1,12 @@
 # UpdateCategoryDto
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**name** | **string** | Name of the category | [optional] [default to undefined]
-**code** | **string** | Unique category code. | [optional] [default to undefined]
-**description** | **string** | Description of the category. | [optional] [default to undefined]
+| Name            | Type       | Description                  | Notes                             |
+| --------------- | ---------- | ---------------------------- | --------------------------------- |
+| **name**        | **string** | Name of the category         | [optional] [default to undefined] |
+| **code**        | **string** | Unique category code.        | [optional] [default to undefined] |
+| **description** | **string** | Description of the category. | [optional] [default to undefined] |
 
 ## Example
 
@@ -15,9 +14,9 @@ Name | Type | Description | Notes
 import { UpdateCategoryDto } from './api';
 
 const instance: UpdateCategoryDto = {
-    name,
-    code,
-    description,
+  name,
+  code,
+  description,
 };
 ```
 

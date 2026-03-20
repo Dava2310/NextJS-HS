@@ -1,15 +1,14 @@
 # CategoryResponseDto
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **number** |  | [default to undefined]
-**name** | **string** |  | [default to undefined]
-**code** | **string** |  | [default to undefined]
-**description** | **string** |  | [default to undefined]
-**deletedAt** | **string** |  | [default to undefined]
+| Name            | Type       | Description | Notes                  |
+| --------------- | ---------- | ----------- | ---------------------- |
+| **id**          | **number** |             | [default to undefined] |
+| **name**        | **string** |             | [default to undefined] |
+| **code**        | **string** |             | [default to undefined] |
+| **description** | **string** |             | [default to undefined] |
+| **deletedAt**   | **string** |             | [default to undefined] |
 
 ## Example
 
@@ -17,11 +16,11 @@ Name | Type | Description | Notes
 import { CategoryResponseDto } from './api';
 
 const instance: CategoryResponseDto = {
-    id,
-    name,
-    code,
-    description,
-    deletedAt,
+  id,
+  name,
+  code,
+  description,
+  deletedAt,
 };
 ```
 

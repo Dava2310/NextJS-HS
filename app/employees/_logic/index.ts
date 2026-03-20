@@ -1,6 +1,7 @@
 import { CreateEmployeeDto, EmployeeResponseDto, UpdateEmployeeDto } from '@/api-client';
 import { apiClient } from '@/lib/api-client';
 import { throwError } from '@/lib/error-utils';
+import * as z from 'zod';
 
 // --- 1. TYPES (VM) ---
 /**
@@ -107,3 +108,11 @@ export const deleteEmployee = async (id: number): Promise<string> => {
     throwError(error, 'There was an error deleting the employee.');
   }
 };
+
+// --- 4. FORMS SCHEMAS ---
+export const employeesFormSchema = z.object({
+  fullName: z.string(),
+  employeeCode: z.string(),
+  email: z.email(),
+  password: z.string(),
+});
