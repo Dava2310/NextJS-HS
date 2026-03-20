@@ -6,9 +6,10 @@ import { toast } from 'sonner';
 
 import { DashboardShell } from '@/components/dashboard-shell';
 import { DataTable } from '@/components/ui/data-table';
-import { columns } from './_components';
 
-import { getEmployees } from './_logic';
+import { columns } from './_components';
+import { EmployeeForm } from './_components/form';
+import { employeesQueryKey, getEmployees } from './_logic';
 
 export default function EmployeePage() {
   const {
@@ -17,7 +18,7 @@ export default function EmployeePage() {
     isError,
     error,
   } = useQuery({
-    queryKey: ['employees'],
+    queryKey: employeesQueryKey,
     queryFn: getEmployees,
     staleTime: 1000 * 60 * 5,
     refetchOnReconnect: false,
@@ -42,6 +43,7 @@ export default function EmployeePage() {
     <DashboardShell title="Employees">
       <div className="@container/main flex flex-1 flex-col gap-2">
         <DataTable columns={columns} data={employees} />
+        <EmployeeForm />
       </div>
     </DashboardShell>
   );

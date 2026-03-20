@@ -1,10 +1,11 @@
 # MessageResponseDto
 
+
 ## Properties
 
-| Name        | Type       | Description          | Notes                  |
-| ----------- | ---------- | -------------------- | ---------------------- |
-| **message** | **string** | Mensaje de respuesta | [default to undefined] |
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**message** | **string** | Mensaje de respuesta | [default to undefined]
 
 ## Example
 
@@ -12,7 +13,7 @@
 import { MessageResponseDto } from './api';
 
 const instance: MessageResponseDto = {
-  message,
+    message,
 };
 ```
 
