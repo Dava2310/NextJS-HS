@@ -1,7 +1,18 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, within, fireEvent } from '@testing-library/react';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import { decrement, increment } from './counter.service';
 import Home from './page';
+
+function renderHome() {
+  return render(
+    <TooltipProvider>
+      <Home />
+    </TooltipProvider>,
+  );
+}
+
+const counterHeadingRole = { level: 1 as const, name: /^Counter:/ };
 
 describe('Counter unit testing', () => {
   it('Increments the counter', () => {
@@ -18,15 +29,15 @@ describe('Counter unit testing', () => {
 
 describe('Counter component testing', () => {
   it('Elements exists', () => {
-    render(<Home />);
-    expect(screen.getByRole('heading', { level: 1 })).toBeDefined();
+    renderHome();
+    expect(screen.getByRole('heading', counterHeadingRole)).toBeDefined();
     expect(screen.getByTestId('increment-button')).toBeDefined();
     expect(screen.getByTestId('decrement-button')).toBeDefined();
     expect(screen.getByTestId('clear-button')).toBeDefined();
   });
 
   it('Buttons have correct text content', () => {
-    const { container } = render(<Home />);
+    const { container } = renderHome();
     const scope = within(container);
     expect(scope.getByTestId('increment-button').textContent).toBe('Increment');
     expect(scope.getByTestId('decrement-button').textContent).toBe('Decrement');
@@ -34,34 +45,34 @@ describe('Counter component testing', () => {
   });
 
   it('Counter increments when clicking the button', () => {
-    const { container } = render(<Home />);
+    const { container } = renderHome();
     const scope = within(container);
 
     const button = scope.getByTestId('increment-button');
     fireEvent.click(button);
 
-    const heading = scope.getByRole('heading', { level: 1 });
+    const heading = scope.getByRole('heading', counterHeadingRole);
     expect(heading.textContent).toBe('Counter: 1');
   });
 
   it('Counter decrements when clicking the button', () => {
-    const { container } = render(<Home />);
+    const { container } = renderHome();
     const scope = within(container);
 
     const button = scope.getByTestId('decrement-button');
     fireEvent.click(button);
 
-    const heading = scope.getByRole('heading', { level: 1 });
+    const heading = scope.getByRole('heading', counterHeadingRole);
     expect(heading.textContent).toBe('Counter: -1');
   });
 
   it('Counter clears when clicking the clear button', () => {
-    const { container } = render(<Home />);
+    const { container } = renderHome();
     const scope = within(container);
 
     const incrementButton = scope.getByTestId('increment-button');
     const clearButton = scope.getByTestId('clear-button');
-    const heading = scope.getByRole('heading', { level: 1 });
+    const heading = scope.getByRole('heading', counterHeadingRole);
 
     for (let i = 0; i < 5; i++) {
       fireEvent.click(incrementButton);
