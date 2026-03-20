@@ -4,6 +4,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { decrement, increment } from './counter.service';
 import Home from './page';
 
+// Wrapper to make TooltipProvider to work
 function renderHome() {
   return render(
     <TooltipProvider>
