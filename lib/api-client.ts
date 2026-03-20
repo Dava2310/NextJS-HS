@@ -1,4 +1,4 @@
-import { Configuration, AppApi } from '@/api-client';
+import { Configuration, AppApi, EmployeesApi } from '@/api-client';
 import { axiosInstance } from './axios';
 
 const config = new Configuration({
@@ -7,4 +7,5 @@ const config = new Configuration({
 
 export const apiClient = {
   app: new AppApi(config, undefined, axiosInstance),
+  employees: new EmployeesApi(config, undefined, axiosInstance),
 };
