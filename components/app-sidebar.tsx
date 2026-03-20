@@ -13,14 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import {
-  LayoutDashboardIcon,
-  ListIcon,
-  ChartBarIcon,
-  FolderIcon,
-  UsersIcon,
-  CommandIcon,
-} from 'lucide-react';
+import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, CommandIcon } from 'lucide-react';
 
 const data = {
   user: {
@@ -41,18 +34,18 @@ const data = {
     },
     {
       title: 'Assets',
-      url: '#',
+      url: '/assets',
       icon: <ChartBarIcon />,
     },
     {
       title: 'Roles',
-      url: '#',
+      url: '/roles',
       icon: <FolderIcon />,
     },
     {
-      title: 'Users',
-      url: '#',
-      icon: <UsersIcon />,
+      title: 'Categories',
+      url: '/categories',
+      icon: <ListIcon />,
     },
   ],
 };

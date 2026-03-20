@@ -66,7 +66,7 @@ export const createEmployee = async (
     // 1. Mapping the new data returned
     const newData = toEmployeeVM(response.data);
 
-    // 2. Returning the new data an a general message
+    // 2. Returning the new data and a general message
     return {
       message: 'Employee created succesfully.',
       newData,
