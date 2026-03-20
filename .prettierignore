@@ -1,4 +1,7 @@
+api-client
 .next
 node_modules
 out
 build
+package-lock.json
+eslint.config.mjs
