@@ -97,7 +97,23 @@ export const updateRole = async (
 
 // --- 4. FORMS SCHEMAS ---
 export const roleFormSchema = z.object({
-  roleCode: z.string(),
-  name: z.string(),
-  description: z.string(),
+  roleCode: z
+    .string()
+    .trim()
+    .min(1, 'Role code is required')
+    .max(32, 'Role code must be at most 32 characters')
+    .regex(
+      /^[A-Za-z0-9]+(?:_[A-Za-z0-9]+)*$/,
+      'Role code may only contain letters, numbers, and underscores (e.g. admin_user)'
+    ),
+  name: z
+    .string()
+    .trim()
+    .min(1, 'Name is required')
+    .max(100, 'Name must be at most 100 characters'),
+  description: z
+    .string()
+    .trim()
+    .min(1, 'Description is required')
+    .max(500, 'Description must be at most 500 characters'),
 });

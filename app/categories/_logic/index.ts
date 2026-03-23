@@ -114,7 +114,23 @@ export const deleteCategory = async (id: number): Promise<string> => {
 
 // --- 4. FORMS SCHEMAS ---
 export const categoryFormSchema = z.object({
-  name: z.string(),
-  code: z.string(),
-  description: z.string(),
+  name: z
+    .string()
+    .trim()
+    .min(1, 'Name is required')
+    .max(100, 'Name must be at most 100 characters'),
+  code: z
+    .string()
+    .trim()
+    .min(1, 'Code is required')
+    .max(32, 'Code must be at most 32 characters')
+    .regex(
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/i,
+      'Code may only contain letters, numbers, and single hyphens between segments'
+    ),
+  description: z
+    .string()
+    .trim()
+    .min(1, 'Description is required')
+    .max(100, 'Description must be at most 100 characters'),
 });

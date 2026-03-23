@@ -114,9 +114,28 @@ export const deleteEmployee = async (id: number): Promise<string> => {
 
 // --- 4. FORMS SCHEMAS ---
 export const employeesFormSchema = z.object({
-  fullName: z.string(),
-  employeeCode: z.string(),
-  email: z.email(),
-  password: z.string(),
-  roleId: z.string(),
+  fullName: z
+    .string()
+    .trim()
+    .min(2, 'Full name must be at least 2 characters')
+    .max(120, 'Full name must be at most 120 characters')
+    .regex(/^[\p{L}\p{M}\s'.-]+$/u, "Full name may only contain letters, spaces, and . ' -"),
+  employeeCode: z
+    .string()
+    .trim()
+    .length(10, 'Employee code must be exactly 10 characters')
+    .regex(/^[A-Za-z0-9]+$/, 'Employee code may only contain letters and numbers'),
+  email: z.string().trim().pipe(z.email('Enter a valid email address')),
+  password: z
+    .string()
+    .refine(
+      (s) => s.length === 0 || s.length >= 8,
+      'Password must be at least 8 characters when provided'
+    ),
+  roleId: z
+    .string()
+    .trim()
+    .min(1, 'Role is required')
+    .regex(/^\d+$/, 'Role must be a valid selection')
+    .refine((v) => parseInt(v, 10) > 0, 'Role must be a valid selection'),
 });
