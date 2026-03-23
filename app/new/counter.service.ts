@@ -13,5 +13,5 @@ export const increment = (count: number, step: number = 1) => {
  * @returns The number decremented.
  */
 export const decrement = (count: number, step: number = 1) => {
-  return (count -= step);
+  return (count += step);
 };
