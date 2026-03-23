@@ -1,6 +1,7 @@
 import { CreateRoleDto, RoleResponseDto, UpdateRoleDto } from '@/api-client';
 import { apiClient } from '@/lib/api-client';
 import { throwError } from '@/lib/error-utils';
+import * as z from 'zod';
 
 // --- 1. TYPES (VM) ---
 /**
@@ -34,6 +35,9 @@ export const toRoleVM = (dto: RoleResponseDto): RoleVM => ({
 export const toRoleVMList = (dtos: RoleResponseDto[]): RoleVM[] => dtos.map(toRoleVM);
 
 // --- 3. API CALLS ---
+/** React Query key for the employees list — keep in sync with consumers. */
+export const roleQueryKey = ['roles'] as const;
+
 export const getRoles = async (): Promise<RoleVM[]> => {
   try {
     const response = await apiClient.roles.rolesControllerFindAll();
@@ -90,3 +94,10 @@ export const updateRole = async (
     throwError(error, 'There was an error updating the role.');
   }
 };
+
+// --- 4. FORMS SCHEMAS ---
+export const roleFormSchema = z.object({
+  roleCode: z.string(),
+  name: z.string(),
+  description: z.string(),
+});

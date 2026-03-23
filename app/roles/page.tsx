@@ -6,9 +6,9 @@ import { toast } from 'sonner';
 
 import { DashboardShell } from '@/components/dashboard-shell';
 import { DataTable } from '@/components/ui/data-table';
-import { columns } from './_components';
 
-import { getRoles } from './_logic';
+import { roleQueryKey, getRoles } from './_logic';
+import { columns, RoleForm } from './_components';
 
 export default function RolesPage() {
   const {
@@ -17,7 +17,7 @@ export default function RolesPage() {
     isError,
     error,
   } = useQuery({
-    queryKey: ['roles'],
+    queryKey: roleQueryKey,
     queryFn: getRoles,
     staleTime: 1000 * 60 * 5,
     refetchOnReconnect: false,
@@ -42,6 +42,7 @@ export default function RolesPage() {
     <DashboardShell title="Roles">
       <div className="@container/main flex flex-1 flex-col gap-2">
         <DataTable columns={columns} data={roles} filterColumns={['name', 'roleCode']} />
+        <RoleForm />
       </div>
     </DashboardShell>
   );
