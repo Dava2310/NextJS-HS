@@ -38,6 +38,9 @@ export const toEmployeeVMList = (dtos: EmployeeResponseDto[]): EmployeeVM[] =>
   dtos.map(toEmployeeVM);
 
 // --- 3. API CALLS ---
+/** React Query key for the employees list — keep in sync with consumers. */
+export const employeesQueryKey = ['employees'] as const;
+
 export const getEmployees = async (): Promise<EmployeeVM[]> => {
   try {
     const response = await apiClient.employees.employeesControllerFindAll();
@@ -115,4 +118,5 @@ export const employeesFormSchema = z.object({
   employeeCode: z.string(),
   email: z.email(),
   password: z.string(),
+  roleId: z.string(),
 });
