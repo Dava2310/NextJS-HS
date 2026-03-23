@@ -41,7 +41,7 @@ export default function RolesPage() {
   return (
     <DashboardShell title="Roles">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <DataTable columns={columns} data={roles} />
+        <DataTable columns={columns} data={roles} filterColumns={['name', 'roleCode']} />
       </div>
     </DashboardShell>
   );

@@ -42,7 +42,7 @@ export default function EmployeePage() {
   return (
     <DashboardShell title="Employees">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <DataTable columns={columns} data={employees} />
+        <DataTable columns={columns} data={employees} filterColumns={['email']} />
         <EmployeeForm />
       </div>
     </DashboardShell>
