@@ -13,7 +13,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, CommandIcon } from 'lucide-react';
+import {
+  LayoutDashboardIcon,
+  ListIcon,
+  CommandIcon,
+  ShieldUser,
+  IdCardLanyard,
+  Box,
+} from 'lucide-react';
 
 const data = {
   user: {
@@ -30,17 +37,17 @@ const data = {
     {
       title: 'Employees',
       url: '/employees',
-      icon: <ListIcon />,
-    },
-    {
-      title: 'Assets',
-      url: '/assets',
-      icon: <ChartBarIcon />,
+      icon: <IdCardLanyard />,
     },
     {
       title: 'Roles',
       url: '/roles',
-      icon: <FolderIcon />,
+      icon: <ShieldUser />,
+    },
+    {
+      title: 'Assets',
+      url: '/assets',
+      icon: <Box />,
     },
     {
       title: 'Categories',

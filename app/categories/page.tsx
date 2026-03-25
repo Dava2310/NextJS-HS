@@ -7,19 +7,18 @@ import { toast } from 'sonner';
 import { DashboardShell } from '@/components/dashboard-shell';
 import { DataTable } from '@/components/ui/data-table';
 
-import { columns } from './_components';
-import { EmployeeForm } from './_components/form';
-import { employeesQueryKey, getEmployees } from './_logic';
+import { CategoryForm, columns } from './_components';
+import { categoriesQueryKey, getCategories } from './_logic';
 
-export default function EmployeePage() {
+export default function CategoriesPage() {
   const {
-    data: employees = [],
+    data: categories = [],
     isSuccess,
     isError,
     error,
   } = useQuery({
-    queryKey: employeesQueryKey,
-    queryFn: getEmployees,
+    queryKey: categoriesQueryKey,
+    queryFn: getCategories,
     staleTime: 1000 * 60 * 5,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
@@ -28,22 +27,22 @@ export default function EmployeePage() {
   // Reacting to API success
   useEffect(() => {
     if (isSuccess) {
-      toast.success('Employees loaded successfully');
+      toast.success('Categories loaded successfully');
     }
   }, [isSuccess]);
 
   // Reacting to API error
   useEffect(() => {
     if (isError) {
-      toast.error(error instanceof Error ? error.message : 'Error loading employees');
+      toast.error(error instanceof Error ? error.message : 'Error loading categories');
     }
   }, [isError, error]);
 
   return (
-    <DashboardShell title="Employees">
+    <DashboardShell title="Categories">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <DataTable columns={columns} data={employees} filterColumns={['email']} />
-        <EmployeeForm />
+        <DataTable columns={columns} data={categories} filterColumns={['name']} />
+        <CategoryForm />
       </div>
     </DashboardShell>
   );

@@ -16,22 +16,22 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { EmployeeVM, deleteEmployee, employeesQueryKey } from '../_logic';
-import { EmployeeForm } from './form';
+import { CategoryVM, deleteCategory, categoriesQueryKey } from '../_logic';
+import { CategoryForm } from '.';
 
-function EmployeeRowActions({ employee }: { employee: EmployeeVM }) {
+function CategoryRowActions({ category }: { category: CategoryVM }) {
   const [editOpen, setEditOpen] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
   const queryClient = useQueryClient();
 
   const handleDelete = () => {
-    toast.promise(deleteEmployee(parseInt(employee.id)), {
+    toast.promise(deleteCategory(parseInt(category.id)), {
       duration: 3000,
       loading: 'Loading...',
       success: (message) => {
-        queryClient.setQueryData<EmployeeVM[]>(
-          employeesQueryKey,
-          (prev) => prev?.filter((e) => e.id !== employee.id) ?? prev
+        queryClient.setQueryData<CategoryVM[]>(
+          categoriesQueryKey,
+          (prev) => prev?.filter((e) => e.id !== category.id) ?? prev
         );
         return message;
       },
@@ -76,9 +76,9 @@ function EmployeeRowActions({ employee }: { employee: EmployeeVM }) {
           <DropdownMenuItem onSelect={handleDelete}>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <EmployeeForm
+      <CategoryForm
         readOnly={readOnly}
-        employee={employee}
+        category={category}
         open={editOpen}
         onOpenChange={handleDialogOpenChange}
       />
@@ -86,32 +86,32 @@ function EmployeeRowActions({ employee }: { employee: EmployeeVM }) {
   );
 }
 
-export const columns: ColumnDef<EmployeeVM>[] = [
+export const columns: ColumnDef<CategoryVM>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
   },
   {
-    accessorKey: 'employeeCode',
-    header: 'Employee Code',
-  },
-  {
-    accessorKey: 'fullName',
-    header: 'Full Name',
-  },
-  {
-    accessorKey: 'email',
+    accessorKey: 'name',
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Email
+          Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
+  },
+  {
+    accessorKey: 'code',
+    header: 'Code',
+  },
+  {
+    accessorKey: 'description',
+    header: 'Description',
   },
   {
     accessorKey: 'status',
@@ -119,6 +119,6 @@ export const columns: ColumnDef<EmployeeVM>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => <EmployeeRowActions employee={row.original} />,
+    cell: ({ row }) => <CategoryRowActions category={row.original} />,
   },
 ];
