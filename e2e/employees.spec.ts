@@ -57,7 +57,7 @@ function uniqueExampleEmail(date: Date): string {
 function buildCreateEmployeePayload() {
   const now = new Date();
   return {
-    fullName: 'Playwright Test Employee',
+    fullName: 'Playwright E2E Employee',
     email: uniqueExampleEmail(now),
     employeeCode: employeeCodeFromDate(now),
     password: randomAlphanumeric(8),
