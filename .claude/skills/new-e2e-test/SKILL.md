@@ -253,10 +253,38 @@ The form's `success` callback calls `setOpenDialog(false)`, which triggers the R
 2. Read `app/<route>/page.tsx` — get the `DashboardShell` title and confirm the route.
 3. Read `app/<route>/_components/form.tsx` — get button text, dialog title, field labels, and field IDs.
 4. Read `app/<route>/_logic/index.ts` — get the Zod schema (to generate valid data) and the success message string.
-5. For each complex control in the flow, read the matching file(s) in `components/ui/` and `components/` as needed.
-6. Check for uniqueness constraints in the schema (codes, emails) and use timestamp-based helpers for those fields.
-7. Check that no text field value contains digits if the schema uses the `\p{L}` letter-only regex.
-8. After implementation, run the **subagent verification loop** (`npm run test:e2e`) and update `.claude/state.md` if you learn something new.
+5. **Read the backend DTO** — see §13 below. This is mandatory to avoid backend-constraint errors.
+6. For each complex control in the flow, read the matching file(s) in `components/ui/` and `components/` as needed.
+7. Check for uniqueness constraints in the schema (codes, emails) and use timestamp-based helpers for those fields.
+8. Check that no text field value contains digits if the schema uses the `\p{L}` letter-only regex.
+9. After implementation, run the **subagent verification loop** (`npm run test:e2e`) and update `.claude/state.md` if you learn something new.
+
+---
+
+---
+
+## 13. Backend DTOs — read before generating test data
+
+The frontend Zod schema and the backend API may enforce **different constraints** on the same field (e.g. the frontend allows `max(32)` for a code field but the API enforces `length === 10`). Always read the backend DTO before writing test data to avoid silent API rejections.
+
+### Where to look
+
+| Source | What it tells you |
+|--------|-------------------|
+| `api-client/models/create-<entity>-dto.ts` | Exact field names and TypeScript types required by the API |
+| `api-client/docs/Create<Entity>Dto.md` | Human-readable property table; may include length / format notes from the OpenAPI spec |
+| Form field `placeholder` attribute (in `form.tsx`) | Often encodes the expected format and length (e.g. `cat-123456` = 10 chars) — treat it as a backend constraint hint when the DTO docs are sparse |
+
+### If the user pastes a DTO directly
+
+When the user provides a DTO interface or class as part of their request (e.g. `CreateCategoryDto`, a NestJS DTO with decorators), **use that as the authoritative source** for field names, types, and constraints. It overrides any assumptions from the Zod schema or placeholder text.
+
+### What to check
+
+- **Field names**: use the exact names from the DTO (the Zod schema keys may differ from DTO keys — the `_logic/index.ts` mapper is the source of truth for how they relate).
+- **String length**: if the DTO doc or placeholder implies an exact length, generate a value of that exact length. Example: placeholder `cat-123456` → 10 chars → use `cat-` + last 6 epoch digits.
+- **Format / pattern**: if the DTO description mentions a slug, UUID, email, or similar format, match it exactly.
+- **Required vs optional**: do not omit required fields; do not rely on defaults for fields the API treats as mandatory.
 
 ---
 
