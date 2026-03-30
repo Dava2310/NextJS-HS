@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **fullName** | **string** | Employee full name | [default to undefined]
 **employeeCode** | **string** | Unique employee code | [default to undefined]
 **email** | **string** | Employee email address | [default to undefined]
+**createdAt** | **string** | When the record was created | [default to undefined]
+**deletedAt** | **string** | Soft-delete timestamp; null while the record is active | [default to undefined]
 
 ## Example
 
@@ -20,6 +22,8 @@ const instance: EmployeeResponseDto = {
     fullName,
     employeeCode,
     email,
+    createdAt,
+    deletedAt,
 };
 ```
 

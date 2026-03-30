@@ -19,4 +19,5 @@ export * from './apis/assets-api';
 export * from './apis/categories-api';
 export * from './apis/employees-api';
 export * from './apis/roles-api';
+export * from './apis/statistics-api';
 

@@ -68,5 +68,29 @@ export interface AssetResponseDto {
      * @memberof AssetResponseDto
      */
     'employeeId': number;
+    /**
+     * When the record was created
+     * @type {string}
+     * @memberof AssetResponseDto
+     */
+    'createdAt': string;
+    /**
+     * Soft-delete timestamp; null while the record is active
+     * @type {string}
+     * @memberof AssetResponseDto
+     */
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AssetResponseDto
+     */
+    'categoryName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AssetResponseDto
+     */
+    'employeeName': string;
 }
 

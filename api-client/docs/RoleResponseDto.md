@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **roleCode** | **string** |  | [default to undefined]
 **name** | **string** |  | [default to undefined]
 **description** | **string** |  | [default to undefined]
+**createdAt** | **string** | When the record was created | [default to undefined]
+**deletedAt** | **string** | Soft-delete timestamp; null while the record is active | [default to undefined]
 
 ## Example
 
@@ -20,6 +22,8 @@ const instance: RoleResponseDto = {
     roleCode,
     name,
     description,
+    createdAt,
+    deletedAt,
 };
 ```
 

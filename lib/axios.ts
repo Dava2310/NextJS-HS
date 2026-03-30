@@ -4,8 +4,7 @@ import axios from 'axios';
  * This is the axios instance for the API.
  */
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3333/api',
-  withCredentials: true,
+  baseURL: 'https://api-hs-2026.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },

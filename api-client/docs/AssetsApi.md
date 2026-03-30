@@ -7,6 +7,8 @@ All URIs are relative to *http://localhost*
 |[**assetsControllerCreate**](#assetscontrollercreate) | **POST** /assets | Creates a new asset in the database.|
 |[**assetsControllerFindAll**](#assetscontrollerfindall) | **GET** /assets | Returns a list of all assets in the database.|
 |[**assetsControllerFindOne**](#assetscontrollerfindone) | **GET** /assets/{id} | Returns a single instance of an Asset.|
+|[**assetsControllerFreeAsset**](#assetscontrollerfreeasset) | **PATCH** /assets/{id}/free | Frees an asset from the employee assigned.|
+|[**assetsControllerGetAssetCreationTimeSeriesByYear**](#assetscontrollergetassetcreationtimeseriesbyyear) | **GET** /assets/creation-timeseries/{year} | Returns monthly counts of assets created in the given calendar year.|
 |[**assetsControllerRemove**](#assetscontrollerremove) | **DELETE** /assets/{id} | Soft deletes the asset from the database.|
 |[**assetsControllerUpdate**](#assetscontrollerupdate) | **PATCH** /assets/{id} | Updates an already existing Asset.|
 
@@ -154,6 +156,109 @@ No authorization required
 |-------------|-------------|------------------|
 |**200** | Data of the asset found. |  -  |
 |**404** | Asset not found or not valid. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **assetsControllerFreeAsset**
+> MessageResponseDto assetsControllerFreeAsset()
+
+
+### Example
+
+```typescript
+import {
+    AssetsApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new AssetsApi(configuration);
+
+let id: number; //Unique asset identifier in the database. (default to undefined)
+
+const { status, data } = await apiInstance.assetsControllerFreeAsset(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**number**] | Unique asset identifier in the database. | defaults to undefined|
+
+
+### Return type
+
+**MessageResponseDto**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Asset freed successfully. |  -  |
+|**400** | Asset has no employee assigned. |  -  |
+|**404** | Asset not found or not valid. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **assetsControllerGetAssetCreationTimeSeriesByYear**
+> Array<AssetCreationTimeSeriesPointDto> assetsControllerGetAssetCreationTimeSeriesByYear()
+
+
+### Example
+
+```typescript
+import {
+    AssetsApi,
+    Configuration
+} from './api';
+
+const configuration = new Configuration();
+const apiInstance = new AssetsApi(configuration);
+
+let year: number; //Calendar year to aggregate (e.g. 2024). (default to undefined)
+
+const { status, data } = await apiInstance.assetsControllerGetAssetCreationTimeSeriesByYear(
+    year
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **year** | [**number**] | Calendar year to aggregate (e.g. 2024). | defaults to undefined|
+
+
+### Return type
+
+**Array<AssetCreationTimeSeriesPointDto>**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Twelve entries, January through December, with creation totals per month. |  -  |
+|**400** | Invalid year. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

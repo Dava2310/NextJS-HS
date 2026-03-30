@@ -45,10 +45,16 @@ export interface CategoryResponseDto {
      */
     'description': string;
     /**
-     * 
+     * When the record was created
      * @type {string}
      * @memberof CategoryResponseDto
      */
-    'deletedAt': string;
+    'createdAt': string;
+    /**
+     * Soft-delete timestamp; null while the record is active
+     * @type {string}
+     * @memberof CategoryResponseDto
+     */
+    'deletedAt': string | null;
 }
 

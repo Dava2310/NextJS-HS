@@ -44,5 +44,17 @@ export interface EmployeeResponseDto {
      * @memberof EmployeeResponseDto
      */
     'email': string;
+    /**
+     * When the record was created
+     * @type {string}
+     * @memberof EmployeeResponseDto
+     */
+    'createdAt': string;
+    /**
+     * Soft-delete timestamp; null while the record is active
+     * @type {string}
+     * @memberof EmployeeResponseDto
+     */
+    'deletedAt': string | null;
 }
 
