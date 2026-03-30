@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **name** | **string** |  | [default to undefined]
 **code** | **string** |  | [default to undefined]
 **description** | **string** |  | [default to undefined]
-**deletedAt** | **string** |  | [default to undefined]
+**createdAt** | **string** | When the record was created | [default to undefined]
+**deletedAt** | **string** | Soft-delete timestamp; null while the record is active | [default to undefined]
 
 ## Example
 
@@ -21,6 +22,7 @@ const instance: CategoryResponseDto = {
     name,
     code,
     description,
+    createdAt,
     deletedAt,
 };
 ```

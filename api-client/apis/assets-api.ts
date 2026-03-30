@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { AssetCreationTimeSeriesPointDto } from '../models';
+// @ts-ignore
 import type { AssetResponseDto } from '../models';
 // @ts-ignore
 import type { CreateAssetDto } from '../models';
@@ -113,6 +115,74 @@ export const AssetsApiAxiosParamCreator = function (configuration?: Configuratio
             assertParamExists('assetsControllerFindOne', 'id', id)
             const localVarPath = `/assets/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Frees an asset from the employee assigned.
+         * @param {number} id Unique asset identifier in the database.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        assetsControllerFreeAsset: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('assetsControllerFreeAsset', 'id', id)
+            const localVarPath = `/assets/{id}/free`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Returns monthly counts of assets created in the given calendar year.
+         * @param {number} year Calendar year to aggregate (e.g. 2024).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        assetsControllerGetAssetCreationTimeSeriesByYear: async (year: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'year' is not null or undefined
+            assertParamExists('assetsControllerGetAssetCreationTimeSeriesByYear', 'year', year)
+            const localVarPath = `/assets/creation-timeseries/{year}`
+                .replace(`{${"year"}}`, encodeURIComponent(String(year)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -259,6 +329,32 @@ export const AssetsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Frees an asset from the employee assigned.
+         * @param {number} id Unique asset identifier in the database.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async assetsControllerFreeAsset(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MessageResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.assetsControllerFreeAsset(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssetsApi.assetsControllerFreeAsset']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Returns monthly counts of assets created in the given calendar year.
+         * @param {number} year Calendar year to aggregate (e.g. 2024).
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async assetsControllerGetAssetCreationTimeSeriesByYear(year: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetCreationTimeSeriesPointDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.assetsControllerGetAssetCreationTimeSeriesByYear(year, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssetsApi.assetsControllerGetAssetCreationTimeSeriesByYear']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Soft deletes the asset from the database.
          * @param {number} id Unique asset identifier in the database.
          * @param {*} [options] Override http request option.
@@ -325,6 +421,26 @@ export const AssetsApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @summary Frees an asset from the employee assigned.
+         * @param {AssetsApiAssetsControllerFreeAssetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        assetsControllerFreeAsset(requestParameters: AssetsApiAssetsControllerFreeAssetRequest, options?: RawAxiosRequestConfig): AxiosPromise<MessageResponseDto> {
+            return localVarFp.assetsControllerFreeAsset(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Returns monthly counts of assets created in the given calendar year.
+         * @param {AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        assetsControllerGetAssetCreationTimeSeriesByYear(requestParameters: AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<AssetCreationTimeSeriesPointDto>> {
+            return localVarFp.assetsControllerGetAssetCreationTimeSeriesByYear(requestParameters.year, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Soft deletes the asset from the database.
          * @param {AssetsApiAssetsControllerRemoveRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -383,6 +499,26 @@ export interface AssetsApiInterface {
 
     /**
      * 
+     * @summary Frees an asset from the employee assigned.
+     * @param {AssetsApiAssetsControllerFreeAssetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetsApiInterface
+     */
+    assetsControllerFreeAsset(requestParameters: AssetsApiAssetsControllerFreeAssetRequest, options?: RawAxiosRequestConfig): AxiosPromise<MessageResponseDto>;
+
+    /**
+     * 
+     * @summary Returns monthly counts of assets created in the given calendar year.
+     * @param {AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetsApiInterface
+     */
+    assetsControllerGetAssetCreationTimeSeriesByYear(requestParameters: AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<AssetCreationTimeSeriesPointDto>>;
+
+    /**
+     * 
      * @summary Soft deletes the asset from the database.
      * @param {AssetsApiAssetsControllerRemoveRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -429,6 +565,34 @@ export interface AssetsApiAssetsControllerFindOneRequest {
      * @memberof AssetsApiAssetsControllerFindOne
      */
     readonly id: number
+}
+
+/**
+ * Request parameters for assetsControllerFreeAsset operation in AssetsApi.
+ * @export
+ * @interface AssetsApiAssetsControllerFreeAssetRequest
+ */
+export interface AssetsApiAssetsControllerFreeAssetRequest {
+    /**
+     * Unique asset identifier in the database.
+     * @type {number}
+     * @memberof AssetsApiAssetsControllerFreeAsset
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for assetsControllerGetAssetCreationTimeSeriesByYear operation in AssetsApi.
+ * @export
+ * @interface AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest
+ */
+export interface AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest {
+    /**
+     * Calendar year to aggregate (e.g. 2024).
+     * @type {number}
+     * @memberof AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYear
+     */
+    readonly year: number
 }
 
 /**
@@ -506,6 +670,30 @@ export class AssetsApi extends BaseAPI implements AssetsApiInterface {
      */
     public assetsControllerFindOne(requestParameters: AssetsApiAssetsControllerFindOneRequest, options?: RawAxiosRequestConfig) {
         return AssetsApiFp(this.configuration).assetsControllerFindOne(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Frees an asset from the employee assigned.
+     * @param {AssetsApiAssetsControllerFreeAssetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetsApi
+     */
+    public assetsControllerFreeAsset(requestParameters: AssetsApiAssetsControllerFreeAssetRequest, options?: RawAxiosRequestConfig) {
+        return AssetsApiFp(this.configuration).assetsControllerFreeAsset(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Returns monthly counts of assets created in the given calendar year.
+     * @param {AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetsApi
+     */
+    public assetsControllerGetAssetCreationTimeSeriesByYear(requestParameters: AssetsApiAssetsControllerGetAssetCreationTimeSeriesByYearRequest, options?: RawAxiosRequestConfig) {
+        return AssetsApiFp(this.configuration).assetsControllerGetAssetCreationTimeSeriesByYear(requestParameters.year, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

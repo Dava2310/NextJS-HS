@@ -13,6 +13,10 @@ Name | Type | Description | Notes
 **brand** | **string** | Brand of the asset | [default to undefined]
 **categoryId** | **number** | Category identifier (foreign key) | [default to undefined]
 **employeeId** | **number** | Employee identifier (foreign key) - assigned custodian | [default to undefined]
+**createdAt** | **string** | When the record was created | [default to undefined]
+**deletedAt** | **string** | Soft-delete timestamp; null while the record is active | [default to undefined]
+**categoryName** | **string** |  | [default to undefined]
+**employeeName** | **string** |  | [default to undefined]
 
 ## Example
 
@@ -28,6 +32,10 @@ const instance: AssetResponseDto = {
     brand,
     categoryId,
     employeeId,
+    createdAt,
+    deletedAt,
+    categoryName,
+    employeeName,
 };
 ```
 

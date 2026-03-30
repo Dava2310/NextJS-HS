@@ -1,4 +1,6 @@
+export * from './asset-creation-time-series-point-dto';
 export * from './asset-response-dto';
+export * from './assets-metrics-dto';
 export * from './category-response-dto';
 export * from './create-asset-dto';
 export * from './create-category-dto';

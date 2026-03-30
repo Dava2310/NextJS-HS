@@ -44,5 +44,17 @@ export interface RoleResponseDto {
      * @memberof RoleResponseDto
      */
     'description': string;
+    /**
+     * When the record was created
+     * @type {string}
+     * @memberof RoleResponseDto
+     */
+    'createdAt': string;
+    /**
+     * Soft-delete timestamp; null while the record is active
+     * @type {string}
+     * @memberof RoleResponseDto
+     */
+    'deletedAt': string | null;
 }
 
