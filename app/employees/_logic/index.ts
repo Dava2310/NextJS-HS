@@ -72,7 +72,7 @@ export const createEmployee = async (
 
     // 2. Returning the new data and a general message
     return {
-      message: 'Employee created succesfully.',
+      message: 'Employee created successfully.',
       newData,
     };
   } catch (error) {
@@ -95,7 +95,7 @@ export const updateEmployee = async (
 
     // 2. Returning the updated data an a general message
     return {
-      message: 'Employee updated succesfully.',
+      message: 'Employee updated successfully.',
       updatedData,
     };
   } catch (error) {
