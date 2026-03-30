@@ -17,6 +17,7 @@ import {
   LayoutDashboardIcon,
   ListIcon,
   CommandIcon,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ShieldUser,
   IdCardLanyard,
   Box,
@@ -30,7 +31,7 @@ const data = {
   },
   navMain: [
     {
-      title: 'Main Page',
+      title: 'Dashboard',
       url: '/dashboard',
       icon: <LayoutDashboardIcon />,
     },
@@ -39,11 +40,11 @@ const data = {
       url: '/employees',
       icon: <IdCardLanyard />,
     },
-    {
-      title: 'Roles',
-      url: '/roles',
-      icon: <ShieldUser />,
-    },
+    // {
+    //   title: 'Roles',
+    //   url: '/roles',
+    //   icon: <ShieldUser />,
+    // },
     {
       title: 'Assets',
       url: '/assets',
