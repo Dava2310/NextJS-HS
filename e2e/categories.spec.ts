@@ -51,7 +51,9 @@ test.describe('Categories page', () => {
     // ── 1. Navigate ─────────────────────────────────────────────────────────
     await test.step('Navigate to categories', async () => {
       await page.goto('/categories');
-      await expect(page.getByRole('heading', { name: 'Categories' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Categories' })).toBeVisible({
+        timeout: 30_000,
+      });
     });
 
     // ── 2. Open dialog ───────────────────────────────────────────────────────

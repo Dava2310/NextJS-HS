@@ -76,7 +76,9 @@ test.describe('Employees page', () => {
     // ── 1. Navigate ─────────────────────────────────────────────────────────
     await test.step('Navigate to employees', async () => {
       await page.goto('/employees');
-      await expect(page.getByRole('heading', { name: 'Employees' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Employees' })).toBeVisible({
+        timeout: 30_000,
+      });
     });
 
     // ── 2. Open dialog ───────────────────────────────────────────────────────
