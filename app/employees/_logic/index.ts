@@ -13,6 +13,7 @@ export interface EmployeeVM {
   employeeCode: string;
   email: string;
   status: 'Active' | 'Inactive';
+  createdAt: string;
 }
 
 // --- 2. MAPPERS ---
@@ -26,7 +27,8 @@ export const toEmployeeVM = (dto: EmployeeResponseDto): EmployeeVM => ({
   email: dto.email,
   employeeCode: dto.employeeCode,
   fullName: dto.fullName,
-  status: 'Active',
+  status: dto.deletedAt ? 'Inactive' : 'Active',
+  createdAt: dto.createdAt,
 });
 
 /**

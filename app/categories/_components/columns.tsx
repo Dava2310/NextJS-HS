@@ -118,6 +118,10 @@ export const columns: ColumnDef<CategoryVM>[] = [
     header: 'Status',
   },
   {
+    accessorKey: 'createdAt',
+    header: 'Created At',
+  },
+  {
     id: 'actions',
     cell: ({ row }) => <CategoryRowActions category={row.original} />,
   },

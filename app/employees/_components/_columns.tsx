@@ -118,6 +118,10 @@ export const columns: ColumnDef<EmployeeVM>[] = [
     header: 'Status',
   },
   {
+    accessorKey: 'createdAt',
+    header: 'Created At',
+  },
+  {
     id: 'actions',
     cell: ({ row }) => <EmployeeRowActions employee={row.original} />,
   },

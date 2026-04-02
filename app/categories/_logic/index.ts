@@ -12,6 +12,7 @@ export interface CategoryVM {
   name: string;
   code: string;
   description: string;
+  createdAt: string;
   status: 'Active' | 'Inactive';
 }
 
@@ -27,6 +28,7 @@ export const toCategoryVM = (dto: CategoryResponseDto): CategoryVM => ({
   description: dto.description,
   name: dto.name,
   status: dto.deletedAt ? 'Inactive' : 'Active',
+  createdAt: dto.createdAt,
 });
 
 /**

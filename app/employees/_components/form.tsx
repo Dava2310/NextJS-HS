@@ -58,6 +58,8 @@ export function EmployeeForm({
 
   const queryClient = useQueryClient();
 
+  const headline = readOnly ? 'View Employee' : employee ? 'Update Employee' : 'Create Employee';
+
   // Form definition
   const form = useForm<z.infer<typeof employeesFormSchema>>({
     resolver: zodResolver(employeesFormSchema),
@@ -119,13 +121,13 @@ export function EmployeeForm({
           <DialogTrigger asChild>
             <Button type="button" className="gap-2 shadow-sm">
               <PlusIcon data-icon="inline-start" />
-              {employee ? 'Update' : 'Create'} employee
+              {headline}
             </Button>
           </DialogTrigger>
         )}
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle>{employee ? 'Update' : 'Create'} Employee</DialogTitle>
+            <DialogTitle>{headline}</DialogTitle>
             <DialogDescription>Fill all the employee neccesary information</DialogDescription>
           </DialogHeader>
           <div className="-mx-4 no-scrollbar max-h-[80vh] overflow-y-auto px-4">

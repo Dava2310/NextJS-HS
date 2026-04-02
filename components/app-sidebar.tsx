@@ -3,25 +3,15 @@
 import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import {
-  LayoutDashboardIcon,
-  ListIcon,
-  CommandIcon,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ShieldUser,
-  IdCardLanyard,
-  Box,
-} from 'lucide-react';
+import { LayoutDashboardIcon, ListIcon, CommandIcon, IdCardLanyard, Box } from 'lucide-react';
 
 const data = {
   user: {
@@ -40,11 +30,6 @@ const data = {
       url: '/employees',
       icon: <IdCardLanyard />,
     },
-    // {
-    //   title: 'Roles',
-    //   url: '/roles',
-    //   icon: <ShieldUser />,
-    // },
     {
       title: 'Assets',
       url: '/assets',
@@ -76,9 +61,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
     </Sidebar>
   );
 }

@@ -7,18 +7,19 @@ import { toast } from 'sonner';
 import { DashboardShell } from '@/components/dashboard-shell';
 import { DataTable } from '@/components/ui/data-table';
 
-import { roleQueryKey, getRoles } from './_logic';
-import { columns, RoleForm } from './_components';
+import { columns } from './_components';
+import { EmployeeForm } from './_components/form';
+import { employeesQueryKey, getEmployees } from './_logic';
 
-export default function RolesPage() {
+export function EmployeesPage() {
   const {
-    data: roles = [],
+    data: employees = [],
     isSuccess,
     isError,
     error,
   } = useQuery({
-    queryKey: roleQueryKey,
-    queryFn: getRoles,
+    queryKey: employeesQueryKey,
+    queryFn: getEmployees,
     staleTime: 1000 * 60 * 5,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
@@ -27,7 +28,7 @@ export default function RolesPage() {
   // Reacting to API success
   useEffect(() => {
     if (isSuccess) {
-      toast.success('Roles loaded successfully');
+      toast.success('Employees loaded successfully');
     }
   }, [isSuccess]);
 
@@ -39,10 +40,10 @@ export default function RolesPage() {
   }, [isError, error]);
 
   return (
-    <DashboardShell title="Roles">
+    <DashboardShell title="Employees">
       <div className="@container/main flex flex-1 flex-col gap-2">
-        <DataTable columns={columns} data={roles} filterColumns={['name', 'roleCode']} />
-        <RoleForm />
+        <DataTable columns={columns} data={employees} filterColumns={['email']} />
+        <EmployeeForm />
       </div>
     </DashboardShell>
   );

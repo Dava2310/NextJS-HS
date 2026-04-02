@@ -16,6 +16,9 @@ export interface AssetVM {
   brand: string;
   categoryId: string;
   employeeId: string;
+  categoryName: string;
+  employeeName: string;
+  createdAt: string;
   status: 'Active' | 'Inactive';
 }
 
@@ -30,11 +33,14 @@ export const toAssetVM = (dto: AssetResponseDto): AssetVM => ({
   brand: dto.brand,
   categoryId: dto.categoryId.toString(),
   description: dto.description,
-  employeeId: dto.employeeId.toString(),
+  employeeId: dto.employeeId?.toString() ?? '0',
   model: dto.model,
   name: dto.name,
   sku: dto.sku,
-  status: 'Active',
+  status: dto.deletedAt ? 'Inactive' : 'Active',
+  createdAt: dto.createdAt,
+  categoryName: dto.categoryName,
+  employeeName: dto.employeeName,
 });
 
 /**
@@ -53,6 +59,7 @@ export const getAssets = async (): Promise<AssetVM[]> => {
     const response = await apiClient.assets.assetsControllerFindAll();
     return toAssetVMList(response.data);
   } catch (error) {
+    console.error(error);
     throwError(error, 'There was an error getting the list of assets.');
   }
 };
@@ -112,6 +119,20 @@ export const deleteAsset = async (id: number): Promise<string> => {
     return response.data.message;
   } catch (error) {
     throwError(error, 'There was an error deleting the asset.');
+  }
+};
+
+/**
+ * It frees the asset from the Employee.
+ * @param id The ID of the asset.
+ * @returns The success message from the API.
+ */
+export const freeAsset = async (id: number): Promise<string> => {
+  try {
+    const response = await apiClient.assets.assetsControllerFreeAsset({ id });
+    return response.data.message;
+  } catch (error) {
+    throwError(error, 'There was an error freeing the asset.');
   }
 };
 

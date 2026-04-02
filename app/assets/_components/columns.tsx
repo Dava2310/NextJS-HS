@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { AssetVM, assetsQueryKey, deleteAsset } from '../_logic';
+import { AssetVM, assetsQueryKey, deleteAsset, freeAsset } from '../_logic';
 
 function AssetRowActions({ asset }: { asset: AssetVM }) {
   const queryClient = useQueryClient();
@@ -29,6 +29,24 @@ function AssetRowActions({ asset }: { asset: AssetVM }) {
         queryClient.setQueryData<AssetVM[]>(
           assetsQueryKey,
           (prev) => prev?.filter((a) => a.id !== asset.id) ?? prev
+        );
+        return message;
+      },
+      error: (error) => error.message,
+    });
+  };
+
+  const handleFree = () => {
+    toast.promise(freeAsset(parseInt(asset.id, 10)), {
+      duration: 3000,
+      loading: 'Loading..',
+      success: (message) => {
+        queryClient.setQueryData<AssetVM[]>(
+          assetsQueryKey,
+          (prev) =>
+            prev?.map((a) =>
+              a.id === asset.id ? { ...a, employeeId: '0', employeeName: 'None' } : a
+            ) ?? prev
         );
         return message;
       },
@@ -54,6 +72,7 @@ function AssetRowActions({ asset }: { asset: AssetVM }) {
           <Link href={`/assets/${asset.id}/edit?view=1`}>View</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={handleDelete}>Delete</DropdownMenuItem>
+        <DropdownMenuItem onSelect={handleFree}>Unassign Employee</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -100,16 +119,24 @@ export const columns: ColumnDef<AssetVM>[] = [
     ),
   },
   {
-    accessorKey: 'categoryId',
-    header: 'Category ID',
+    accessorKey: 'categoryName',
+    header: 'Category',
   },
   {
-    accessorKey: 'employeeId',
-    header: 'Custodian ID',
+    accessorKey: 'employeeName',
+    header: 'Custodian',
+    cell: ({ row }) => {
+      const name = row.original.employeeName;
+      return !name || name === 'None' ? '—' : name;
+    },
   },
   {
     accessorKey: 'status',
     header: 'Status',
+  },
+  {
+    accessorKey: 'createdAt',
+    header: 'Created At',
   },
   {
     id: 'actions',
