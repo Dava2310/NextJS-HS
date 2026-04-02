@@ -64,6 +64,8 @@ export function CategoryForm({
 
   const queryClient = useQueryClient();
 
+  const headline = readOnly ? 'View Category' : category ? 'Update Category' : 'Create Category';
+
   // Form definition
   const form = useForm<z.infer<typeof categoryFormSchema>>({
     resolver: zodResolver(categoryFormSchema),
@@ -117,13 +119,13 @@ export function CategoryForm({
           <DialogTrigger asChild>
             <Button type="button" className="gap-2 shadow-sm">
               <PlusIcon data-icon="inline-start" />
-              {category ? 'Update' : 'Create'} category
+              {headline}
             </Button>
           </DialogTrigger>
         )}
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle>{category ? 'Update' : 'Create'} category</DialogTitle>
+            <DialogTitle>{headline}</DialogTitle>
             <DialogDescription>Fill all the category neccesary information</DialogDescription>
           </DialogHeader>
           <div className="-mx-4 no-scrollbar max-h-[80vh] overflow-y-auto px-4">

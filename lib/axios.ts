@@ -5,6 +5,7 @@ import axios from 'axios';
  */
 export const axiosInstance = axios.create({
   baseURL: 'https://api-hs-2026.onrender.com/api',
+  // baseURL: 'http://localhost:3333/api',
   headers: {
     'Content-Type': 'application/json',
   },

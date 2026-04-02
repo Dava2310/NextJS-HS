@@ -2,7 +2,7 @@
 
 import { useQueryClient } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Building2, Cpu, FileText, FolderTree, Hash, Package, UserRound } from 'lucide-react';
+import { Building2, Cpu, FileText, Hash, Package } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -25,12 +25,25 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from '@/components/ui/input-group';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+
+import { CategoryVM } from '@/app/categories/_logic';
+import { EmployeeVM } from '@/app/employees/_logic';
 
 import { assetFormSchema, assetsQueryKey, createAsset, updateAsset, type AssetVM } from '../_logic';
 
 type AssetFormProps = {
   asset?: AssetVM;
   readOnly?: boolean;
+  categories: CategoryVM[];
+  employees: EmployeeVM[];
 };
 
 function toCreatePayload(data: z.infer<typeof assetFormSchema>) {
@@ -45,12 +58,13 @@ function toCreatePayload(data: z.infer<typeof assetFormSchema>) {
   };
 }
 
-export function AssetForm({ asset, readOnly }: AssetFormProps) {
+export function AssetForm({ asset, readOnly, categories, employees }: AssetFormProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof assetFormSchema>>({
     resolver: zodResolver(assetFormSchema),
+    mode: 'onChange',
     defaultValues: {
       name: asset?.name ?? '',
       sku: asset?.sku ?? '',
@@ -245,23 +259,33 @@ export function AssetForm({ asset, readOnly }: AssetFormProps) {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="asset-form-category-id">Category ID</FieldLabel>
-                    <InputGroup className="h-10">
-                      <InputGroupAddon align="inline-start">
-                        <FolderTree className="text-muted-foreground" aria-hidden />
-                      </InputGroupAddon>
-                      <InputGroupInput
-                        readOnly={readOnly}
-                        {...field}
+                    <FieldLabel htmlFor="asset-form-category-id">Category</FieldLabel>
+                    <Select
+                      value={field.value ? field.value : undefined}
+                      onValueChange={field.onChange}
+                      disabled={readOnly}
+                    >
+                      <SelectTrigger
                         id="asset-form-category-id"
+                        ref={field.ref}
+                        className="h-10 w-full"
                         aria-invalid={fieldState.invalid}
-                        placeholder="1"
-                        inputMode="numeric"
-                        autoComplete="off"
-                      />
-                    </InputGroup>
+                        onBlur={field.onBlur}
+                      >
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {categories.map((cat) => (
+                            <SelectItem key={cat.id} value={cat.id}>
+                              {cat.code ? `${cat.name} (${cat.code})` : cat.name}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                     {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                    <FieldDescription>ID of the category this asset belongs to</FieldDescription>
+                    <FieldDescription>Category this asset belongs to</FieldDescription>
                   </Field>
                 )}
               />
@@ -270,27 +294,33 @@ export function AssetForm({ asset, readOnly }: AssetFormProps) {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="asset-form-employee-id">
-                      Custodian (employee ID)
-                    </FieldLabel>
-                    <InputGroup className="h-10">
-                      <InputGroupAddon align="inline-start">
-                        <UserRound className="text-muted-foreground" aria-hidden />
-                      </InputGroupAddon>
-                      <InputGroupInput
-                        readOnly={readOnly}
-                        {...field}
+                    <FieldLabel htmlFor="asset-form-employee-id">Custodian</FieldLabel>
+                    <Select
+                      value={field.value ? field.value : undefined}
+                      onValueChange={field.onChange}
+                      disabled={readOnly}
+                    >
+                      <SelectTrigger
                         id="asset-form-employee-id"
+                        ref={field.ref}
+                        className="h-10 w-full"
                         aria-invalid={fieldState.invalid}
-                        placeholder="1"
-                        inputMode="numeric"
-                        autoComplete="off"
-                      />
-                    </InputGroup>
+                        onBlur={field.onBlur}
+                      >
+                        <SelectValue placeholder="Select employee" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {employees.map((emp) => (
+                            <SelectItem key={emp.id} value={emp.id}>
+                              {emp.fullName}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                     {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                    <FieldDescription>
-                      ID of the employee responsible for this asset
-                    </FieldDescription>
+                    <FieldDescription>Employee responsible for this asset</FieldDescription>
                   </Field>
                 )}
               />

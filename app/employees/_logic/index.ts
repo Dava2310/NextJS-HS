@@ -13,6 +13,7 @@ export interface EmployeeVM {
   employeeCode: string;
   email: string;
   status: 'Active' | 'Inactive';
+  createdAt: string;
 }
 
 // --- 2. MAPPERS ---
@@ -26,7 +27,8 @@ export const toEmployeeVM = (dto: EmployeeResponseDto): EmployeeVM => ({
   email: dto.email,
   employeeCode: dto.employeeCode,
   fullName: dto.fullName,
-  status: 'Active',
+  status: dto.deletedAt ? 'Inactive' : 'Active',
+  createdAt: dto.createdAt,
 });
 
 /**
@@ -72,7 +74,7 @@ export const createEmployee = async (
 
     // 2. Returning the new data and a general message
     return {
-      message: 'Employee created succesfully.',
+      message: 'Employee created successfully.',
       newData,
     };
   } catch (error) {
@@ -95,7 +97,7 @@ export const updateEmployee = async (
 
     // 2. Returning the updated data an a general message
     return {
-      message: 'Employee updated succesfully.',
+      message: 'Employee updated successfully.',
       updatedData,
     };
   } catch (error) {
