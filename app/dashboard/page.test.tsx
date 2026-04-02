@@ -18,16 +18,24 @@ vi.mock('./_logic', () => ({
   ]),
 }));
 
-vi.mock('@/components/chart-area-interactive', () => ({
+vi.mock('./_components/chart-area-interactive', () => ({
   ChartAreaInteractive: () => null,
 }));
 
-vi.mock('@/components/data-table-v2', () => ({
+vi.mock('./_components/section-cards', () => ({
+  SectionCards: () => null,
+}));
+
+vi.mock('@/components/ui/data-table', () => ({
   DataTable: () => null,
 }));
 
-vi.mock('@/components/section-cards', () => ({
-  SectionCards: () => null,
+vi.mock('./_components/columns', () => ({
+  columns: [],
+}));
+
+vi.mock('@/app/assets/_logic', () => ({
+  getAssets: vi.fn().mockResolvedValue([]),
 }));
 
 vi.mock('@/components/dashboard-shell', () => ({
