@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 /** Matches the message returned by `createEmployee` in app/employees/_logic/index.ts. */
 const EMPLOYEE_CREATED_MESSAGE = /Employee created successfully/;
+const EMPLOYEE_DELETED_MESSAGE = /Employee deleted successfully/i;
 
 const ROLE_ID = '1';
 
@@ -172,6 +173,57 @@ test.describe('Employees page', () => {
       // The form's success callback calls setOpenDialog(false); allow time for
       // the Radix UI Dialog close animation to complete.
       await expect(dialog).toBeHidden({ timeout: 10_000 });
+    });
+  });
+
+  test('deletes an employee from the row actions menu', async ({ page }) => {
+    test.setTimeout(TEST_TIMEOUT_MS);
+
+    // ── 1. Navigate ──────────────────────────────────────────────────────────
+    await test.step('Navigate to employees', async () => {
+      await page.goto('/employees');
+      await expect(page.getByRole('heading', { name: 'Employees' })).toBeVisible({
+        timeout: 30_000,
+      });
+    });
+
+    // ── 2. Wait for table data ───────────────────────────────────────────────
+    await test.step('Wait for at least one data row', async () => {
+      await page.locator('table tbody tr').first().waitFor({ state: 'visible', timeout: 30_000 });
+    });
+
+    // Set up toast watchers before triggering the action.
+    const successToast = page
+      .locator('[data-sonner-toast][data-type="success"]')
+      .filter({ hasText: EMPLOYEE_DELETED_MESSAGE });
+    const errorToast = page.locator('[data-sonner-toast][data-type="error"]');
+
+    const toastResultPromise = Promise.race([
+      successToast
+        .waitFor({ state: 'visible', timeout: TOAST_TIMEOUT_MS })
+        .then(() => 'success' as const),
+      errorToast
+        .waitFor({ state: 'visible', timeout: TOAST_TIMEOUT_MS })
+        .then(() => 'error' as const),
+    ]).catch(() => 'timeout' as const);
+
+    // ── 3. Open row actions and delete ──────────────────────────────────────
+    await test.step('Open row actions and click Delete', async () => {
+      await page.getByRole('button', { name: 'Open menu' }).first().click();
+      await page.getByRole('menuitem', { name: 'Delete' }).click();
+    });
+
+    // ── 4. Assert success toast ──────────────────────────────────────────────
+    await test.step('Assert delete success toast', async () => {
+      const result = await toastResultPromise;
+
+      if (result === 'error') {
+        const errorText = await errorToast.textContent().catch(() => '(could not read text)');
+        throw new Error(`API returned an error toast: "${errorText?.trim()}"`);
+      }
+      if (result === 'timeout') {
+        throw new Error('Neither a success nor an error toast appeared within the timeout window.');
+      }
     });
   });
 });
