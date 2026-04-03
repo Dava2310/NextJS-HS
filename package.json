@@ -13,7 +13,9 @@
     "prettier:fix": "prettier --write .",
     "prepare": "husky",
     "test": "vitest",
-    "test:e2e": "playwright test --project=chromium"
+    "test:e2e": "playwright test --project=chromium",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
@@ -63,7 +65,19 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.0",
+    "storybook": "^10.3.4",
+    "@storybook/nextjs-vite": "^10.3.4",
+    "@chromatic-com/storybook": "^5.1.1",
+    "@storybook/addon-vitest": "^10.3.4",
+    "@storybook/addon-a11y": "^10.3.4",
+    "@storybook/addon-docs": "^10.3.4",
+    "@storybook/addon-onboarding": "^10.3.4",
+    "vite": "^8.0.3",
+    "eslint-plugin-storybook": "^10.3.4",
+    "playwright": "^1.59.1",
+    "@vitest/browser-playwright": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
