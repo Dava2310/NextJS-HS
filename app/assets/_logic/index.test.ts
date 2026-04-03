@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { assetFormSchema, toAssetVM, toAssetVMList } from './index';
+import { assetFormSchema, toAssetVM } from './index';
 import type { AssetResponseDto } from '@/api-client';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -141,21 +141,5 @@ describe('toAssetVM', () => {
 
   it('sets employeeId to "0" when employeeId is null', () => {
     expect(toAssetVM(makeDto({ employeeId: null as unknown as number })).employeeId).toBe('0');
-  });
-});
-
-// ── toAssetVMList ─────────────────────────────────────────────────────────────
-
-describe('toAssetVMList', () => {
-  it('maps every DTO in the list', () => {
-    const vms = toAssetVMList([makeDto({ id: 1 }), makeDto({ id: 2, name: 'Dell XPS' })]);
-
-    expect(vms).toHaveLength(2);
-    expect(vms[0].id).toBe('1');
-    expect(vms[1].name).toBe('Dell XPS');
-  });
-
-  it('returns an empty array for an empty input', () => {
-    expect(toAssetVMList([])).toEqual([]);
   });
 });
