@@ -31,17 +31,17 @@ IT Assets Tracker is a web application for managing a company's IT inventory. It
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router) + React 19 |
-| Styling | Tailwind CSS 4 + shadcn/ui |
-| Server state | TanStack Query v5 |
-| Forms | React Hook Form + Zod |
-| Tables | TanStack Table v8 |
-| API client | Auto-generated OpenAPI TypeScript client |
-| Unit tests | Vitest + Testing Library |
-| E2E tests | Playwright |
-| Component catalog | Storybook 10 |
+| Layer             | Technology                               |
+| ----------------- | ---------------------------------------- |
+| Framework         | Next.js 16 (App Router) + React 19       |
+| Styling           | Tailwind CSS 4 + shadcn/ui               |
+| Server state      | TanStack Query v5                        |
+| Forms             | React Hook Form + Zod                    |
+| Tables            | TanStack Table v8                        |
+| API client        | Auto-generated OpenAPI TypeScript client |
+| Unit tests        | Vitest + Testing Library                 |
+| E2E tests         | Playwright                               |
+| Component catalog | Storybook 10                             |
 
 ## API
 
@@ -71,16 +71,16 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Scripts
 
-| Script | Description |
-|---|---|
-| `npm run dev` | Start the development server |
-| `npm run build` | Create a production build |
-| `npm run start` | Serve the production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Run ESLint and auto-fix issues |
-| `npm run prettier:check` | Check formatting with Prettier |
-| `npm run prettier:fix` | Auto-format all files |
-| `npm run test` | Run unit and component tests with Vitest |
-| `npm run test:e2e` | Run Playwright end-to-end tests |
-| `npm run storybook` | Start the Storybook component catalog on port 6006 |
-| `npm run build-storybook` | Build a static Storybook export |
+| Script                    | Description                                        |
+| ------------------------- | -------------------------------------------------- |
+| `npm run dev`             | Start the development server                       |
+| `npm run build`           | Create a production build                          |
+| `npm run start`           | Serve the production build locally                 |
+| `npm run lint`            | Run ESLint                                         |
+| `npm run lint:fix`        | Run ESLint and auto-fix issues                     |
+| `npm run prettier:check`  | Check formatting with Prettier                     |
+| `npm run prettier:fix`    | Auto-format all files                              |
+| `npm run test`            | Run unit and component tests with Vitest           |
+| `npm run test:e2e`        | Run Playwright end-to-end tests                    |
+| `npm run storybook`       | Start the Storybook component catalog on port 6006 |
+| `npm run build-storybook` | Build a static Storybook export                    |
