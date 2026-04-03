@@ -1,19 +1,10 @@
 # IT Assets Tracker
 
-> **Live app:** [https://your-deployment-url.vercel.app](https://your-deployment-url.vercel.app) ← _replace with your Vercel URL_
+> **Live app:** [https://itassetstracker.vercel.app](https://itassetstracker.vercel.app)
 
 ---
 
-<!--
-  SCREENSHOT
-  To add a screenshot:
-  1. Take a screenshot of the running app (e.g. the Dashboard page).
-  2. Save the file as `screenshot.png` in the root of this repository.
-  3. Replace the placeholder below with:
-     ![Dashboard](./screenshot.png)
--->
-
-> 📸 _Add a screenshot here — see instructions in the source comment above._
+![Dashboard](./next-dashboard.png)
 
 ---
 
